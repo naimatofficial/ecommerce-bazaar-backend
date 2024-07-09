@@ -12,6 +12,11 @@ const categorySchema = new mongoose.Schema(
 			type: String,
 			required: [true, "Please provide logo."],
 		},
+		status: {
+			type: String,
+			enum: ["active", "inactive"],
+			default: "active",
+		},
 		priority: Number,
 		slug: String,
 	},

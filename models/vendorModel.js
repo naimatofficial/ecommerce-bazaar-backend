@@ -53,6 +53,15 @@ const vendorSchema = new mongoose.Schema(
 			minlength: 8,
 			select: false,
 		},
+		status: {
+			type: String,
+			enum: ["active", "inactive"],
+			default: "inactive",
+		},
+	},
+	{
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
 	},
 	{
 		timestamps: true,

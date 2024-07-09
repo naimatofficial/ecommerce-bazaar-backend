@@ -62,15 +62,22 @@ export const getOne = (Model, popOptions) =>
 		});
 	});
 
-export const getAll = (Model) =>
+export const getAll = (Model, popOptions) =>
 	catchAsync(async (req, res) => {
 		// To allow nested GET reviews on tour
-		console.log("GET ALL", req.query);
 		let filter = {};
 		if (req?.params?.productId) filter = { tour: req.params.productId };
 
 		// EXECUTE QUERY
-		const features = new APIFeatures(Model.find(filter), req.query)
+		let query = Model.find(filter);
+
+		// If popOptions is provided, populate the query
+		if (popOptions) {
+			query = query.populate(popOptions);
+		}
+
+		// EXECUTE QUERY
+		const features = new APIFeatures(query, req.query)
 			.filter()
 			.sort()
 			.fieldsLimit()

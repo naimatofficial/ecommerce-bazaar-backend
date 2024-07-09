@@ -12,10 +12,14 @@ import {
 	vendorLogout,
 	VendorSignup,
 } from "../controllers/authController.js";
-import Vendor from "../models/vendorModel.js";
+import {
+	createVendorBank,
+	getVendorBanks,
+} from "../controllers/vendorBankController.js";
 
 const router = express.Router();
 
+// VENDOR AUTH END POINTS
 router.post("/login", VendorLogin);
 router.post("/register", VendorSignup);
 router.post("/logout", protect, vendorLogout);
@@ -30,5 +34,11 @@ router
 	.get(protect, getVendor)
 	.put(protect, updateVendor)
 	.delete(protect, restrictTo("admin", "vendor"), deleteVendor);
+
+// VENDOR BANK END POINTS
+router
+	.route("/bank")
+	.post(protect, restrictTo("admin", "vendor"), createVendorBank)
+	.get(protect, restrictTo("admin", "vendor"), getVendorBanks);
 
 export default router;
