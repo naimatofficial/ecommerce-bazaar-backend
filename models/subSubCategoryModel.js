@@ -19,7 +19,10 @@ const subSubCategorySchema = new mongoose.Schema(
 			ref: "SubCategory",
 		},
 		priority: Number,
-		slug: String,
+	},
+	{
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
 	},
 	{
 		timestamps: true,
@@ -29,7 +32,7 @@ const subSubCategorySchema = new mongoose.Schema(
 subSubCategorySchema.pre(/^find/, function (next) {
 	this.populate({
 		path: "mainCategory subCategory",
-		select: "-__v -createdAt -updatedAt -mainCategory",
+		select: "-__v -createdAt -updatedAt",
 		populate: {
 			path: "name",
 		},
@@ -37,9 +40,8 @@ subSubCategorySchema.pre(/^find/, function (next) {
 	next();
 });
 
-subSubCategorySchema.pre("save", function (next) {
-	this.slug = slugify(this.name, { lower: true });
-	next();
+subSubCategorySchema.virtual("slug").get(function () {
+	return slugify(this.name, { lower: true });
 });
 
 const SubSubCategory = mongoose.model("subSubCategory", subSubCategorySchema);

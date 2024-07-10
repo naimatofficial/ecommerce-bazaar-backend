@@ -12,16 +12,23 @@ const brandSchema = new mongoose.Schema(
 			type: String,
 			required: [true, "Please provide logo."],
 		},
-		slug: string,
+		status: {
+			type: String,
+			enum: ["active", "inactive"],
+			default: "active",
+		},
+	},
+	{
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
 	},
 	{
 		timestamps: true,
 	}
 );
 
-brandSchema.pre("save", function (next) {
-	this.slug = slugify(this.name, { lower: true });
-	next();
+brandSchema.virtual("slug").get(function () {
+	return slugify(this.name, { lower: true });
 });
 
 const Brand = mongoose.model("Brand", brandSchema);

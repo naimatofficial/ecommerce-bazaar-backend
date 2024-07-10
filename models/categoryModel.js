@@ -18,29 +18,18 @@ const categorySchema = new mongoose.Schema(
 			default: "active",
 		},
 		priority: Number,
-		slug: String,
+	},
+	{
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
 	},
 	{
 		timestamps: true,
 	}
 );
 
-categorySchema.pre("save", function (next) {
-	if (this.isModified("name")) {
-		this.slug = slugify(this.name, { lower: true });
-		console.log(`Slug updated to: ${this.slug}`);
-	}
-	next();
-});
-
-categorySchema.pre("findByIdAndUpdate", function (next) {
-	const update = this.getUpdate();
-	if (update.name) {
-		update.slug = slugify(update.name, { lower: true });
-		this.setUpdate(update); // Ensure the update is set correctly
-		console.log(`Slug updated to: ${update.slug}`);
-	}
-	next();
+categorySchema.virtual("slug").get(function () {
+	return slugify(this.name, { lower: true });
 });
 
 const Category = mongoose.model("Category", categorySchema);
