@@ -11,6 +11,7 @@ import {
 } from "../controllers/categoryController.js";
 import { getSubCategoriesFromMainCategory } from "../controllers/subCategoryController.js";
 import { getSubSubCategoriesFromSubCategories } from "../controllers/subSubCategoryController.js";
+import { uploadSingleImage } from "../middleware/upload.js";
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.get(
 router
 	.route("/")
 	.get(getCategories)
-	.post(protect, restrictTo("admin"), createCategory);
+	.post(protect, restrictTo("admin"), uploadSingleImage, createCategory);
 
 router
 	.route("/:id")

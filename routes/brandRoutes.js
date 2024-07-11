@@ -9,13 +9,14 @@ import {
 	getBrands,
 	updateBrand,
 } from "../controllers/brandController.js";
+import { uploadSingleImage } from "../middleware/upload.js";
 
 const router = express.Router();
 
 router
 	.route("/")
 	.get(protect, getBrands)
-	.post(protect, restrictTo("admin"), createBrand);
+	.post(protect, restrictTo("admin"), uploadSingleImage, createBrand);
 
 router
 	.route("/:id")

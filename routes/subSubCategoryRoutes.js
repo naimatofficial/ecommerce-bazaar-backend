@@ -9,13 +9,14 @@ import {
 	getSubSubCategory,
 	updateSubSubCategory,
 } from "../controllers/subSubCategoryController.js";
+import { uploadSingleImage } from "../middleware/upload.js";
 
 const router = express.Router();
 
 router
 	.route("/")
 	.get(getSubSubCategories)
-	.post(protect, restrictTo("admin"), createSubSubCategory);
+	.post(protect, restrictTo("admin"), uploadSingleImage, createSubSubCategory);
 
 router
 	.route("/:id")
