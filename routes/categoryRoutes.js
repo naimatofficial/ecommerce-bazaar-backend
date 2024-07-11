@@ -9,8 +9,17 @@ import {
 	getCategory,
 	updateCategory,
 } from "../controllers/categoryController.js";
+import { getSubCategoriesFromMainCategory } from "../controllers/subCategoryController.js";
+import { getSubSubCategoriesFromSubCategories } from "../controllers/subSubCategoryController.js";
 
 const router = express.Router();
+
+router.get("/:mainCategory/sub-categories", getSubCategoriesFromMainCategory);
+
+router.get(
+	"/:mainCategory/sub-categories/:subCategory/sub-sub-categories",
+	getSubSubCategoriesFromSubCategories
+);
 
 router
 	.route("/")
