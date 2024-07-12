@@ -11,6 +11,7 @@ import vendorRoutes from "./routes/vendorRoutes.js";
 import deliverymanRoutes from "./routes/deliverymanRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import brandRoutes from "./routes/brandRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import subCategoryRoutes from "./routes/subCategoryRoutes.js";
 import subSubCategoryRoutes from "./routes/subSubCategoryRoutes.js";
 
@@ -31,6 +32,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/deliverymans", deliverymanRoutes);
 app.use("/api/brands", brandRoutes);
+app.use("/api/orders", orderRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/sub-categories", subCategoryRoutes);
 app.use("/api/sub-sub-categories", subSubCategoryRoutes);
