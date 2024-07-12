@@ -8,8 +8,8 @@ import {
 } from "./../controllers/vendorController.js";
 import { protect, restrictTo } from "../middleware/authMiddleware.js";
 import {
+	logout,
 	VendorLogin,
-	vendorLogout,
 	VendorSignup,
 } from "../controllers/authController.js";
 import {
@@ -22,7 +22,7 @@ const router = express.Router();
 // VENDOR AUTH END POINTS
 router.post("/login", VendorLogin);
 router.post("/register", VendorSignup);
-router.post("/logout", protect, vendorLogout);
+router.post("/logout", protect, logout);
 
 router
 	.route("/")

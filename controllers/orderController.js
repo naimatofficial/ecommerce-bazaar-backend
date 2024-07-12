@@ -1,5 +1,6 @@
-import Order from "../models/orderModel";
-import catchAsync from "../utils/catchAsync";
+import Order from "../models/orderModel.js";
+import catchAsync from "../utils/catchAsync.js";
+import { deleteOne, getAll, getOne, updateOne } from "./handleFactory.js";
 
 export const createOrder = catchAsync(async (req, res) => {
 	const customer = req.user?._id;
