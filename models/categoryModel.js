@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema(
 			required: [true, "Please provide category name."],
 			unique: true,
 		},
-		logo: {
+		image: {
 			type: String,
 			required: [true, "Please provide logo."],
 		},

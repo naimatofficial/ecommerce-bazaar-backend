@@ -8,6 +8,7 @@ import globalErrorHandler from "./controllers/errorController.js";
 // ROUTES
 import userRoutes from "./routes/userRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
 import customerRoutes from "./routes/customerRoutes.js";
 import deliverymanRoutes from "./routes/deliverymanRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/users", userRoutes);
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/customers", customerRoutes);
+app.use("/api/banners", bannerRoutes);
 app.use("/api/deliverymans", deliverymanRoutes);
 app.use("/api/brands", brandRoutes);
 app.use("/api/orders", orderRoutes);

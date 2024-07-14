@@ -38,8 +38,8 @@ export const updateOne = (Model) =>
 export const createOne = (Model) =>
 	catchAsync(async (req, res, next) => {
 		let data = req.body;
-		const imageUrl = req.files.logo ? req.files.logo[0].path : null;
-		if (imageUrl) data = { ...data, logo: imageUrl };
+		const imageUrl = req.files.image ? req.files.image[0].path : null;
+		if (imageUrl) data = { ...data, image: imageUrl };
 		const doc = await Model.create(data);
 
 		res.status(201).json({

@@ -22,7 +22,7 @@ router.post("/logout", protect, logout);
 router
 	.route("/")
 	.post(protect, restrictTo("admin"), createCustomer)
-	.get(protect, getCustomers);
+	.get(protect, restrictTo("admin", "vendor"), getCustomers);
 
 router
 	.route("/:id")
